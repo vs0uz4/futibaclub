@@ -1,0 +1,20 @@
+version: '2.1'
+
+volumes:
+  example-mysql-data:
+    driver: local
+
+services:
+  # MySQL (5.7)
+  mysql:
+    image: mysql:5.7
+    container_name: example_container_name
+    volumes:
+      - example-mysql-data:/var/lib/mysql
+    ports:
+      - '${DB_PORT}:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}

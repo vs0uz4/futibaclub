@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="full-height">
+
+<head>
+    <!-- head -->
+    <% include elements/header %>
+</head>
+
+<body>
+    <header>
+        <!--Navbar-->
+        <% include elements/navbar %>
+
+        <!--Intro Section-->
+        <section class="view intro-2 hm-gradient">
+            <div class="full-bg-img">
+                <div class="container flex-center">
+                    <div class="row flex-center">
+                        <div class="col-md-10 col-lg-6 text-center text-md-left margins">
+                            <div class="white-text">
+                                <img src="/img/escudo.png" alt="escudo" />
+                                <h1 class="h1-responsive font-bold mt-sm-5 wow fadeInLeft" data-wow-delay="0.3s">Desafie seus amigos</h1>
+                                <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                                <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Quem consegue acertar mais jogos da Copa e do Brasileirão?
+                                </h6>
+                                <br>
+                                <a class="btn btn-white dark-grey-text font-bold wow fadeInLeft" data-wow-delay="0.3s">Criar conta</a>
+                                <a class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Ver classificação</a>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 hidden-md-down wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
+                            <img src="/img/mock.png" class="img-fluid" alt="mock">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>            
+    </header>
+
+    <section>
+        <div class="container">
+            <h2>Classificação Grupos</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Grupo</th>
+                        <th>Pontos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Peladeiros da noite</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Masters of None</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Filhos do Pelé</td>
+                        <td>300</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="card col">
+                    <div class="card-body">
+                        <form>
+                            <p class="h5 text-center mb-4">Entrar</p>
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input type="text" id="orangeForm-email" class="form-control">
+                                <label for="orangeForm-email">E-mail</label>
+                            </div>
+                        
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input type="password" id="orangeForm-pass" class="form-control">
+                                <label for="orangeForm-pass">Senha</label>
+                            </div>
+                        
+                            <div class="text-center">
+                                <button class="btn btn-deep-orange">Entrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card col">
+                    <div class="card-body">
+                        <form class="col">
+                            <p class="h5 text-center mb-4">Criar uma conta</p>
+                        
+                            <div class="md-form">
+                                <i class="fa fa-user prefix grey-text"></i>
+                                <input type="text" id="orangeForm-name" class="form-control">
+                                <label for="orangeForm-name">Seu nome</label>
+                            </div>
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input type="text" id="orangeForm-email" class="form-control">
+                                <label for="orangeForm-email">Seu e-mail</label>
+                            </div>
+                        
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input type="password" id="orangeForm-pass" class="form-control">
+                                <label for="orangeForm-pass">Sua senha</label>
+                            </div>
+                        
+                            <div class="text-center">
+                                <button class="btn btn-deep-orange">Criar conta</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+      <!-- Form contact -->
+      <form>
+
+        <p class="h5 text-center mb-4">Write to us</p>
+    
+        <div class="md-form">
+            <i class="fa fa-user prefix grey-text"></i>
+            <input type="text" id="form3" class="form-control">
+            <label for="form3">Your name</label>
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input type="text" id="form2" class="form-control">
+            <label for="form2">Your email</label>
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-tag prefix grey-text"></i>
+            <input type="text" id="form32" class="form-control">
+            <label for="form34">Subject</label>
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-pencil prefix grey-text"></i>
+            <textarea type="text" id="form8" class="md-textarea" style="height: 100px"></textarea>
+            <label for="form8">Your message</label>
+        </div>
+    
+        <div class="text-center">
+            <button class="btn btn-unique">Send <i class="fa fa-paper-plane-o ml-1"></i></button>
+        </div>
+    
+      </form>
+      <!-- Form contact -->
+    </section>
+    
+    
+</body>
+  <!-- footer -->
+  <% include elements/footer %>
+</html>

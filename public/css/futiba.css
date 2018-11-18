@@ -1,0 +1,51 @@
+.intro-2 {
+  background: url('../img/campo.png')no-repeat center center;
+  background-size: cover;
+}
+
+.top-nav-collapse {
+  background-color: #499542 !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+
+@media (max-width: 768px) {
+  .navbar:not(.top-nav-collapse) {
+      background: #459542 !important;
+  }
+}
+
+h6 {
+  line-height: 1.7;
+}
+
+.hm-gradient .full-bg-img {
+  background: -moz-linear-gradient(45deg, rgba(38, 161, 27, 0.7), rgba(35, 210, 29, 0.7) 100%);
+  background: -webkit-linear-gradient(45deg, rgba(81, 161, 27, 0.7), rgba(35, 210, 29, 0.7) 100%);
+  background: -webkit-gradient(linear, 45deg, from(rgba(69, 161, 27, 0.7)), to(rgba(35, 210, 29, 0.7)));
+  background: -o-linear-gradient(45deg, rgba(38, 161, 27, 0.7), rgba(35, 210, 29, 0.7) 100%);
+  background: linear-gradient(to 45deg, rgba(31, 161, 27, 0.7), rgba(35, 210, 29, 0.7) 100%);
+}
+
+@media (max-width: 450px) {
+  .margins {
+      margin-right: 1rem;
+      margin-left: 1rem;
+  }
+}
+
+.navbar-inner {
+  min-height: 0px;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+  line-height: 70px;
+  height: 70px;
+  padding-top: 0;
+}
+.navbar-brand img{
+  margin: 6px;
+}

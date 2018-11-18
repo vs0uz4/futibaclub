@@ -1,0 +1,28 @@
+{
+  "name": "futibaclub",
+  "version": "1.0.0",
+  "description": "Bolão de Apostas de Resultados dos Jogos de Futebol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: nenhum teste especificado\" && exit 1"
+  },
+  "keywords": [
+    "futibol",
+    "apostas",
+    "jogos",
+    "bolão",
+    "resultados"
+  ],
+  "author": "Vitor Rodrigues <vitorrodrigues@gmail.com> (https://github.com/vs0uz4)",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^6.1.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mysql2": "^1.6.4"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
+}

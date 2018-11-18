@@ -1,0 +1,38 @@
+.top-nav-collapse {
+  background-color: #499542 !important;
+}
+
+@media (max-width: 768px) {
+  .navbar:not(.top-nav-collapse) {
+      background: #459542 !important;
+  }
+}
+
+h6 {
+  line-height: 1.7;
+}
+
+@media (max-width: 450px) {
+  .margins {
+      margin-right: 1rem;
+      margin-left: 1rem;
+  }
+}
+
+.navbar-inner {
+  min-height: 0px;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+  line-height: 70px;
+  height: 70px;
+  padding-top: 0;
+}
+.navbar-brand img{
+  margin: 6px;
+}
+
+.content{
+  margin: 140px 0 0 0;
+}
