@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- header -->
+    <% include _partials/header %>
+</head>
+
+<body>
+    <header>
+    <!-- navbar -->
+    <% include _partials/navbar %>
+    </header>
+
+    <section class="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <form class="col col-6" method="POST">
+                    <p class="h5 text-center mb-4">Entrar</p>
+                    <div class="md-form">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <input type="email" id="orangeForm-email" name="email" class="form-control" value="<%= locals.email ? email : '' %>" required />
+                        <label for="orangeForm-email">E-mail</label>
+                    </div>
+
+                    <div class="md-form">
+                        <i class="fa fa-lock prefix grey-text"></i>
+                        <input type="password" id="orangeForm-pass" name="passwd" class="form-control" value="<%= locals.passwd ? passwd : '' %>" required />
+                        <label for="orangeForm-pass">Senha</label>
+                    </div>
+
+                    <% if(locals.error) { %>
+                        <div class="alert alert-danger">
+                            <%= error %>
+                        </div>
+                    <% } %>
+
+                    <div class="text-center">
+                        <button class="btn btn-deep-orange">Entrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <% include _partials/footer %>
+</body>
+</html>
