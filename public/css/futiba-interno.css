@@ -4,7 +4,7 @@
 
 @media (max-width: 768px) {
   .navbar:not(.top-nav-collapse) {
-      background: #459542 !important;
+    background: #459542 !important;
   }
 }
 
@@ -14,8 +14,8 @@ h6 {
 
 @media (max-width: 450px) {
   .margins {
-      margin-right: 1rem;
-      margin-left: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
   }
 }
 
@@ -29,10 +29,17 @@ h6 {
   height: 70px;
   padding-top: 0;
 }
-.navbar-brand img{
+
+.navbar-brand img {
   margin: 6px;
 }
 
-.content{
+.navbar {
+  font-weight: 300;
+  padding-right: 1rem !important;
+  background-color: #4CAF50 !important;
+}
+
+.content {
   margin: 140px 0 0 0;
 }
