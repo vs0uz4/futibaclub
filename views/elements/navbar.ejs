@@ -8,37 +8,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Início</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Grupos</a>
-                </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Classificação</a>
-                </li>
-                <% if (locals.user) { %>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> <%= user.name %>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <% if (user.role === 'root') { %>
-                                <a class="dropdown-item" href="#"><i class="fa fa-trophy fa-fw" aria-hidden="true"></i> Gerenciar Jogos</a>
-                            <% } %>
-                            <a class="dropdown-item" href="#"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> Meu Perfil</a>
-                            <a class="dropdown-item" href="/sign-out"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Sair</a>
-                        </div>
-                    </li>
-                <% } else { %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/sign-in"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Entrar</a>
-                    </li>
-                <% } %>
-            </ul>
-            
+            <!-- menu items -->
+            <% include menu-items %>
         </div>
     </div>
 </nav>
