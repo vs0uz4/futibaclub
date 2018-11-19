@@ -55,12 +55,22 @@ const init = connection => {
 
     const [rows, fields] = await connection.execute('SELECT * FROM users WHERE email = ?', [email])
     if (rows.length === 0) {
-      await connection.execute('INSERT INTO users (name, email, passwd, role) VALUES (?, ?, ?, ?)', [
+      const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO users (name, email, passwd, role) VALUES (?, ?, ?, ?)', [
         name,
         email,
         passwd,
         'user'
       ])
+
+      const user = {
+        id: resultSetHeader.insertId,
+        name: name,
+        role: 'user'
+      }
+      req.session.user = user
+
+      console.log(resultSetHeader)
+
       res.redirect('/')
     } else {
       res.render('account/new', {
