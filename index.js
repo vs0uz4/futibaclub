@@ -4,6 +4,8 @@ const session = require('express-session')
 const mysql = require('mysql2/promise')
 const bodyParser = require('body-parser')
 
+const middleware = require('./middleware')
+const admin = require('./admin')
 const account = require('./account')
 
 // Get Enviroment Variables
@@ -38,18 +40,13 @@ const init = async () => {
       database: dbDatabase
     })
 
-    app.use((req, res, next) => {
-      if (req.session.user) {
-        res.locals.user = req.session.user
-      }
-      next()
-    })
-
+    app.use(middleware)
     app.get('/', async (req, res) => {
       res.render('home')
     })
 
     app.use(account(connection))
+    app.use('/admin', admin(connection))
 
     app.listen(port, error => {
       if (error) {
