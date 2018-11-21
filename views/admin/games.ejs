@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- header -->
+    <% include ../_partials/painel/header %>
+</head>
+
+<body>
+    <header>
+    <!-- navbar -->
+    <% include ../_partials/navbar %>
+    </header>
+
+    <section class="content">
+        <div class="container">
+            <h2>Gerenciamento de Jogos</h2>
+            <form class="row justify-content-center mt-3" method="POST">
+                <div class="md-form">
+                    <i class="fa fa-shield prefix grey-text"></i>
+                    <input type="text" id="orangeForm-team-a" name="team_a" class="form-control" required />
+                    <label for="orangeForm-team-a">Time A</label>
+                </div>
+                <i class="fa fa-arrows-h fa-fw fa-4x grey-text ml-3 mr-3" aria-hidden="true"></i>
+                <div class="md-form">
+                    <i class="fa fa-shield prefix grey-text"></i>
+                    <input type="text" id="orangeForm-team-b" name="team_b" class="form-control" required />
+                    <label for="orangeForm-team-b">Time B</label>
+                </div>
+                <div class="text-center ml-2 mr-2">
+                    <button class="btn btn-deep-orange waves-effect waves-light">Criar Jogo</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <% if (games.length !== 0) { %>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Jogos</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% games.forEach( game => { %>
+                        <tr>
+                            <th scope="row"><%= game.id %></th>
+                            <td><%= game.team_a %> vs <%= game.team_b %></td>
+                            <td class="text-center">
+                                <a href="/admin/games/delete/<%= game.id %>" class="btn btn-sm red accent-3 waves-effect waves-light">Excluir</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% }else{ %>
+                <p class="alert alert-info">Nenhum Jogo Encontrado.</p>
+            <% } %>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <% include ../_partials/painel/footer %>
+</body>
+</html>
