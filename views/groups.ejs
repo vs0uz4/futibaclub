@@ -61,7 +61,7 @@
                             <td>
                                 <a href="/groups/<%= group.id %>" class="btn btn-sm btn-default mr-1 ml-1">Ver</a>
                                 <% if(group.role === 'owner') { %>
-                                    <a href="/admin/groups/delete/<%= group.id %>" class="btn btn-sm btn-danger mr-1 ml-1">Excluir</a>
+                                    <a href="/groups/delete/<%= group.id %>" class="btn btn-sm btn-danger mr-1 ml-1">Excluir</a>
                                 <% } %>
                                 <% if(!group.role) { %>
                                     <a href="/groups/<%= group.id %>/participate" class="btn btn-sm btn-default mr-1 ml-1">Participar</a>

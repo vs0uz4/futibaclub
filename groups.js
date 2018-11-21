@@ -11,6 +11,19 @@ const init = connection => {
     })
   })
 
+  route.post('/', async (req, res) => {
+    const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO groups (name) VALUES (?)', [
+      req.body.name
+    ])
+    await connection.execute('INSERT INTO groups_users (group_id, user_id, role) VALUES (?, ?, ?)', [
+      resultSetHeader.insertId,
+      req.session.user.id,
+      'owner'
+    ])
+
+    res.redirect('/groups')
+  })
+
   route.get('/:id', async (req, res) => {
     const [groupRows, groupFields] = await connection.execute('SELECT groups.*, groups_users.role FROM groups LEFT JOIN groups_users ON groups_users.group_id = groups.id AND groups_users.user_id = ? WHERE groups.id = ?', [
       req.session.user.id,
@@ -66,15 +79,17 @@ const init = connection => {
     }
   })
 
-  route.post('/', async (req, res) => {
-    const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO groups (name) VALUES (?)', [
-      req.body.name
-    ])
-    await connection.execute('INSERT INTO groups_users (group_id, user_id, role) VALUES (?, ?, ?)', [
-      resultSetHeader.insertId,
+  route.get('/delete/:id', async (req, res) => {
+    const [rows, fields] = await connection.execute('SELECT groups.*, groups_users.role FROM groups LEFT JOIN groups_users ON groups_users.group_id = groups.id AND groups_users.user_id = ? WHERE groups.id = ?', [
       req.session.user.id,
-      'owner'
+      req.params.id
     ])
+
+    if (rows.length > 0 || rows[0].role === 'owner') {
+      await connection.execute('DELETE FROM groups WHERE id = ?', [
+        req.params.id
+      ])
+    }
 
     res.redirect('/groups')
   })
