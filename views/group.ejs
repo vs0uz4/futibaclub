@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- header -->
+    <% include _partials/painel/header %>
+</head>
+
+<body>
+    <header>
+    <!-- navbar -->
+    <% include _partials/navbar %>
+    </header>
+
+    <section class="content">
+        <div class="container">
+          <h2>Grupo [<%= group.name %>]</h2>
+            <% if (group.role === 'owner') { %>
+              <% if (pendings.length > 0) { %>
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th>#</th>
+                              <th>Grupo</th>
+                              <th>Relação</th>
+                              <th>Ações</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <% pendings.forEach( pending => { %>
+                          <tr>
+                              <th scope="row"><%= pending.id %></th>
+                              <td><%= pending.name %></td>
+                              <td>
+                                  <% switch (pending.role) {
+                                      case 'owner' : %>
+                                          Proprietário
+                                          <% break
+                                      case 'pending' : %>
+                                          Pendente
+                                          <% break
+                                      case 'user' : %>
+                                          Usuário
+                                          <% break
+                                  } %>
+                              </td>
+                              <td>
+                                  <a href="/groups/<%= pending.group_id %>/approval/<%= pending.id %>/yes" class="btn btn-sm btn-default mr-1 ml-1">Permitir</a>
+                                  <a href="/groups/<%= pending.group_id %>/approval/<%= pending.id %>/no" class="btn btn-sm btn-danger mr-1 ml-1">Negar</a>
+                              </td>
+                          </tr>
+                          <% }) %>
+                      </tbody>
+                  </table>
+              <% }else{ %>
+                  <div class="alert alert-info alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Aviso!</strong> Nenhum Usuário com Aprovação Pendente Encontrado.
+                  </div>
+              <% } %>
+            <% } else if (group.role === 'pending') { %>
+              <p class="alert alert-info">Sua Aprovação Ainda Encontra-se Pendente.</p>
+            <% } else { %>
+              Usuário Normal
+            <% } %>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <% include _partials/painel/footer %>
+</body>
+</html>

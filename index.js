@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const middleware = require('./middleware')
 const admin = require('./admin')
 const account = require('./account')
+const groups = require('./groups')
 
 // Get Enviroment Variables
 const port = process.env.APP_PORT || 3000
@@ -28,6 +29,7 @@ app.use(session({
   saveUninitialized: true,
   resave: true
 }))
+app.use(middleware)
 app.set('view engine', 'ejs')
 
 const init = async () => {
@@ -40,23 +42,23 @@ const init = async () => {
       database: dbDatabase
     })
 
-    app.use(middleware)
     app.get('/', async (req, res) => {
       res.render('home')
     })
 
     app.use(account(connection))
+    app.use('/groups', groups(connection))
     app.use('/admin', admin(connection))
 
     app.listen(port, error => {
       if (error) {
-        console.log(`Error in Startup ${appName} Server\nError: ${error.code}\nMessage ${error.message}`)
+        console.log(`Error in Startup ${appName} Server\nError Message ${error.message}`)
       } else {
         console.log(`${appName} Server Running...`)
       }
     })
   } catch (error) {
-    console.log(`Error occurred in Initialize App\nError: ${error.code}\nMessage:${error.message}`)
+    console.log(`Error occurred in Initialize App\nError Message: ${error.message}`)
   }
 }
 
