@@ -21,9 +21,9 @@
                       <thead>
                           <tr>
                               <th>#</th>
-                              <th>Grupo</th>
+                              <th>Usuário</th>
                               <th>Relação</th>
-                              <th>Ações</th>
+                              <th class="text-center">Ações</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -44,7 +44,7 @@
                                           <% break
                                   } %>
                               </td>
-                              <td>
+                              <td class="text-center">
                                   <a href="/groups/<%= pending.group_id %>/approval/<%= pending.id %>/yes" class="btn btn-sm btn-default mr-1 ml-1">Permitir</a>
                                   <a href="/groups/<%= pending.group_id %>/approval/<%= pending.id %>/no" class="btn btn-sm btn-danger mr-1 ml-1">Negar</a>
                               </td>
@@ -52,16 +52,51 @@
                           <% }) %>
                       </tbody>
                   </table>
-              <% }else{ %>
-                  <div class="alert alert-info alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Aviso!</strong> Nenhum Usuário com Aprovação Pendente Encontrado.
-                  </div>
               <% } %>
-            <% } else if (group.role === 'pending') { %>
-              <p class="alert alert-info">Sua Aprovação Ainda Encontra-se Pendente.</p>
+            <% } %>
+            <% if (group.role === 'pending') { %>
+                <p class="alert alert-info">Sua Aprovação Ainda Encontra-se Pendente.</p>
             <% } else { %>
-              Usuário Normal
+
+            <form method="POST">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-center">Game</th>
+                            <th class="text-center">Pontuação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% games.forEach( game => { %>
+                        <tr>
+                            <td scope="row" class="align-middle"><%= game.id %></td>
+                            <td class="text-center">
+                                <div class="d-inline-block col-md-8 pl-0 pr-0 ml-0 mr-0">
+                                    <span class="team-title mr-2 d-inline-block text-right"><%= game.team_a %></span>
+                                    <% if(game.guess_a) { %>
+                                        <p class="form-control-static d-inline-block text-center pt-0 pb-0 mt-0 mb-0"><strong><%= game.guess_a %></strong></p>
+                                    <%} else { %>
+                                        <input name="game_<%= game.id %>[team_a]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required />
+                                    <% } %>
+                                    <span class="ml-2 mr-2 d-inline-block">vs</span>
+                                    <% if(game.guess_b) { %>
+                                        <p class="form-control-static d-inline-block text-center pt-0 pb-0 mt-0 mb-0"><strong><%= game.guess_b %></strong></p>
+                                    <%} else { %>
+                                        <input name="game_<%= game.id %>[team_b]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required />
+                                    <% } %>
+                                    <span class="team-title ml-2 d-inline-block text-left"><%= game.team_b %></span>
+                                </div>
+                            </td>
+                            <td class="text-center align-middle">100</td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <div>
+                    <button type="submit" class="btn btn-deep-orange waves-effect waves-light">Salvar Apostas</button>
+                </div>
+            </form>
             <% } %>
         </div>
     </section>

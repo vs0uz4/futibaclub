@@ -29,3 +29,8 @@
 .navbar .dropdown-menu a:hover {
   color: rgb(139, 104, 104) !important;
 }
+
+.team-title {
+  width: 170px !important;
+  line-height: 35px;
+}

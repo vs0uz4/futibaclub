@@ -32,11 +32,44 @@ const init = connection => {
     const [pendingRows, pendingFields] = await connection.execute("SELECT groups_users.*, users.name FROM groups_users INNER JOIN users ON groups_users.user_id = users.id AND groups_users.group_id = ? AND groups_users.role LIKE 'pending'", [
       req.params.id
     ])
+    const [gameRows, gameFields] = await connection.execute('SELECT games.*, guessings.result_a as guess_a, guessings.result_b as guess_b FROM games LEFT JOIN guessings ON games.id = guessings.game_id AND guessings.user_id = ? AND guessings.group_id = ?', [
+      req.session.user.id,
+      req.params.id
+    ])
 
     res.render('group', {
       pendings: pendingRows,
-      group: groupRows[0]
+      group: groupRows[0],
+      games: gameRows
     })
+  })
+
+  route.post('/:id', async (req, res) => {
+    const guessings = []
+    Object
+      .keys(req.body)
+      .forEach(game => {
+        const parts = game.split('_')
+        const guess = {
+          game_id: parts[1],
+          result_a: req.body[game].team_a,
+          result_b: req.body[game].team_b
+        }
+        guessings.push(guess)
+      })
+
+    const batch = guessings.map(guess => {
+      return connection.execute('INSERT INTO guessings (result_a, result_b, game_id, group_id, user_id) VALUES (?, ?, ?, ?, ?)', [
+        guess.result_a,
+        guess.result_b,
+        guess.game_id,
+        req.params.id,
+        req.session.user.id
+      ])
+    })
+    await Promise.all(batch)
+
+    res.redirect('/groups/' + req.params.id)
   })
 
   route.get('/:id/participate', async (req, res) => {
