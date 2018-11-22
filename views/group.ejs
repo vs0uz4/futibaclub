@@ -14,89 +14,94 @@
 
     <section class="content">
         <div class="container">
-          <h2>Grupo [<%= group.name %>]</h2>
+            <h2>Grupo <span class="badge badge-default"><%= group.name %></span></h2>
             <% if (group.role === 'owner') { %>
               <% if (pendings.length > 0) { %>
-                  <table class="table table-striped">
-                      <thead>
-                          <tr>
-                              <th>#</th>
-                              <th>Usuário</th>
-                              <th>Relação</th>
-                              <th class="text-center">Ações</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <% pendings.forEach( pending => { %>
-                          <tr>
-                              <th scope="row"><%= pending.id %></th>
-                              <td><%= pending.name %></td>
-                              <td>
-                                  <% switch (pending.role) {
-                                      case 'owner' : %>
-                                          Proprietário
-                                          <% break
-                                      case 'pending' : %>
-                                          Pendente
-                                          <% break
-                                      case 'user' : %>
-                                          Usuário
-                                          <% break
-                                  } %>
-                              </td>
-                              <td class="text-center">
-                                  <a href="/groups/<%= pending.group_id %>/approval/<%= pending.id %>/yes" class="btn btn-sm btn-default mr-1 ml-1">Permitir</a>
-                                  <a href="/groups/<%= pending.group_id %>/approval/<%= pending.id %>/no" class="btn btn-sm btn-danger mr-1 ml-1">Negar</a>
-                              </td>
-                          </tr>
-                          <% }) %>
-                      </tbody>
-                  </table>
+                <h4 class="mt-4"><i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>Usuários Pendentes</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Usuário</th>
+                            <th>Relação</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% pendings.forEach( pending => { %>
+                        <tr>
+                            <th scope="row"><%= pending.id %></th>
+                            <td><%= pending.name %></td>
+                            <td>
+                                <% switch (pending.role) {
+                                    case 'owner' : %>
+                                        Proprietário
+                                        <% break
+                                    case 'pending' : %>
+                                        Pendente
+                                        <% break
+                                    case 'user' : %>
+                                        Usuário
+                                        <% break
+                                } %>
+                            </td>
+                            <td class="text-center">
+                                <a href="/groups/<%= pending.group_id %>/approval/<%= pending.id %>/yes" class="btn btn-sm btn-default mr-1 ml-1">Permitir</a>
+                                <a href="/groups/<%= pending.group_id %>/approval/<%= pending.id %>/no" class="btn btn-sm btn-danger mr-1 ml-1">Negar</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
               <% } %>
             <% } %>
             <% if (group.role === 'pending') { %>
                 <p class="alert alert-info">Sua Aprovação Ainda Encontra-se Pendente.</p>
             <% } else { %>
-
-            <form method="POST">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th class="text-center">Game</th>
-                            <th class="text-center">Pontuação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% games.forEach( game => { %>
-                        <tr>
-                            <td scope="row" class="align-middle"><%= game.id %></td>
-                            <td class="text-center">
-                                <div class="d-inline-block col-md-8 pl-0 pr-0 ml-0 mr-0">
-                                    <span class="team-title mr-2 d-inline-block text-right"><%= game.team_a %></span>
-                                    <% if(game.guess_a) { %>
-                                        <p class="form-control-static d-inline-block text-center pt-0 pb-0 mt-0 mb-0"><strong><%= game.guess_a %></strong></p>
-                                    <%} else { %>
-                                        <input name="game_<%= game.id %>[team_a]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required />
-                                    <% } %>
-                                    <span class="ml-2 mr-2 d-inline-block">vs</span>
-                                    <% if(game.guess_b) { %>
-                                        <p class="form-control-static d-inline-block text-center pt-0 pb-0 mt-0 mb-0"><strong><%= game.guess_b %></strong></p>
-                                    <%} else { %>
-                                        <input name="game_<%= game.id %>[team_b]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required />
-                                    <% } %>
-                                    <span class="team-title ml-2 d-inline-block text-left"><%= game.team_b %></span>
-                                </div>
-                            </td>
-                            <td class="text-center align-middle">100</td>
-                        </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
-                <div>
-                    <button type="submit" class="btn btn-deep-orange waves-effect waves-light">Salvar Apostas</button>
-                </div>
-            </form>
+                <h4 class="mt-4"><i class="fa fa-trophy fa-fw" aria-hidden="true"></i>Palpites dos Jogos</h4>
+                <% let disableds = 0 %>
+                <form method="POST">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-center">Game</th>
+                                <th class="text-center">Resultado</th>
+                                <th class="text-center">Pontuação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% games.forEach( game => { %>
+                                <% if ((game.result_a !== null && game.result_b !== null) || (game.guess_a !== null && game.guess_b !== null)) { disableds += 1 } %>
+                                <tr>
+                                    <td scope="row" class="align-middle"><%= game.id %></td>
+                                    <td class="text-center">
+                                        <div class="d-inline-block col-md-8 pl-0 pr-0 ml-0 mr-0">
+                                            <span class="team-title mr-2 d-inline-block text-right"><%= game.team_a %></span>
+                                            <% if(game.guess_a || game.result_a) { %>
+                                                <p class="form-control-static d-inline-block text-center pt-0 pb-0 mt-0 mb-0"><strong><%= game.guess_a %></strong></p>
+                                            <%} else { %>
+                                                <input name="game_<%= game.id %>[team_a]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required />
+                                            <% } %>
+                                            <span class="ml-2 mr-2 d-inline-block">vs</span>
+                                            <% if(game.guess_b || game.result_b) { %>
+                                                <p class="form-control-static d-inline-block text-center pt-0 pb-0 mt-0 mb-0"><strong><%= game.guess_b %></strong></p>
+                                            <%} else { %>
+                                                <input name="game_<%= game.id %>[team_b]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required />
+                                            <% } %>
+                                            <span class="team-title ml-2 d-inline-block text-left"><%= game.team_b %></span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center align-middle"><%= (game.result_a !== null) ? game.result_a : ''  %> x <%= (game.result_b !== null) ? game.result_b : ''  %></td>
+                                    <td class="text-center align-middle"><%= (game.score !== null) ? game.score : 0 %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <div>
+                        <button type="submit" class="btn btn-deep-orange waves-effect waves-light <%- (disableds === games.length) ? 'disabled' : '' %>">Salvar Apostas</button>
+                    </div>
+                </form>
             <% } %>
         </div>
     </section>

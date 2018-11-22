@@ -36,12 +36,14 @@
 
     <section>
         <div class="container">
+            <form method="POST" action="/admin/games/results">
             <% if (games.length !== 0) { %>
+                <h4><i class="fa fa-trophy fa-fw" aria-hidden="true"></i>Resultados dos Jogos</h4>
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Jogos</th>
+                            <th class="text-center">Jogos</th>
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
@@ -49,7 +51,15 @@
                         <% games.forEach( game => { %>
                         <tr>
                             <th scope="row"><%= game.id %></th>
-                            <td><%= game.team_a %> vs <%= game.team_b %></td>
+                            <td class="text-center">
+                                <div class="d-inline-block col-md-8 pl-0 pr-0 ml-0 mr-0">
+                                    <span class="team-title mr-2 d-inline-block text-right"><%= game.team_a %></span>
+                                    <input name="game_<%= game.id %>[team_a]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required value="<%= (game.result_a ? game.result_a : '') %>"/>
+                                    <span class="ml-2 mr-2 d-inline-block">vs</span>
+                                    <input name="game_<%= game.id %>[team_b]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required value="<%= (game.result_b ? game.result_b : '') %>" />
+                                    <span class="team-title ml-2 d-inline-block text-left"><%= game.team_b %></span>
+                                </div>
+                            </td>
                             <td class="text-center">
                                 <a href="/admin/games/delete/<%= game.id %>" class="btn btn-sm red accent-3 waves-effect waves-light">Excluir</a>
                             </td>
@@ -57,7 +67,11 @@
                         <% }) %>
                     </tbody>
                 </table>
-            <% }else{ %>
+                <div>
+                    <button type="submit" class="btn btn-deep-orange waves-effect waves-light">Salvar Resultados</button>
+                </div>
+            </form>
+            <% } else { %>
                 <p class="alert alert-info">Nenhum Jogo Encontrado.</p>
             <% } %>
         </div>
