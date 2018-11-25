@@ -6,7 +6,7 @@
         <a class="nav-link" href="/groups"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Grupos</a>
     </li>
     <li class="nav-item <%- (locals.url.length > 1 && locals.url.includes('ranking')) ? 'active' : '' %>">
-        <a class="nav-link" href="#"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Classificação</a>
+        <a class="nav-link" href="/ranking"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Classificação</a>
     </li>
     <% if (locals.user) { %>
         <li class="nav-item dropdown <%- (locals.url.length > 1 && locals.url.includes('/admin/games')) ? 'active' : '' %>">
