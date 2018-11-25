@@ -8,6 +8,7 @@ const middleware = require('./middleware')
 const admin = require('./admin')
 const account = require('./account')
 const groups = require('./groups')
+const ranking = require('./ranking')
 
 // Get Enviroment Variables
 const port = process.env.APP_PORT || 3000
@@ -48,6 +49,7 @@ const init = async () => {
 
     app.use(account(connection))
     app.use('/groups', groups(connection))
+    app.use('/ranking', ranking(connection))
     app.use('/admin', admin(connection))
 
     app.listen(port, error => {
