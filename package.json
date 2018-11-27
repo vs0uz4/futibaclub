@@ -21,7 +21,8 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "mysql2": "^1.6.4"
+    "mysql2": "^1.6.4",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "standard": "^12.0.1"
