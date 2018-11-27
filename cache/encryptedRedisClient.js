@@ -20,6 +20,11 @@ class EncryptedRedisClient {
     const encValue = this.safe.encrypt(value)
     this.redisClient.set(key, encValue, cb)
   }
+
+  setex (key, seconds, value, cb) {
+    const encValue = this.safe.encrypt(value)
+    this.redisClient.setex(key, seconds, encValue, cb)
+  }
 }
 
 module.exports = EncryptedRedisClient
