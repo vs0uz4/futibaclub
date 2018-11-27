@@ -4,11 +4,14 @@ volumes:
   example-mysql-data:
     driver: local
 
+  example-redis-data:
+    driver: local
+
 services:
   # MySQL (5.7)
   mysql:
     image: mysql:5.7
-    container_name: example_container_name
+    container_name: example_mysql_container_name
     volumes:
       - example-mysql-data:/var/lib/mysql
     ports:
@@ -18,3 +21,13 @@ services:
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
+
+  # Redis (4.0)
+  cache:
+    image: redis:4.0
+    container_name: example_cache_container_name
+    command: --appendonly yes --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - example-redis-data:/data
+    ports:
+      - "${REDIS_PORT}:6379"
