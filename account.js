@@ -1,5 +1,6 @@
 const express = require('express')
 const route = express.Router()
+const md5 = require('./utils/md5')
 
 const init = connection => {
   route.get('/sign-in', (req, res) => {
@@ -13,7 +14,7 @@ const init = connection => {
     } = req.body
 
     const [rows, fields] = await connection.execute('SELECT * FROM users WHERE email = ?', [email])
-    if (rows.length !== 0 && rows[0].passwd === passwd) {
+    if (rows.length !== 0 && rows[0].passwd === md5(passwd)) {
       const userDb = rows[0]
       const user = {
         id: userDb.id,
@@ -58,7 +59,7 @@ const init = connection => {
       const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO users (name, email, passwd, role) VALUES (?, ?, ?, ?)', [
         name,
         email,
-        passwd,
+        md5(passwd),
         'user'
       ])
 
@@ -68,8 +69,6 @@ const init = connection => {
         role: 'user'
       }
       req.session.user = user
-
-      console.log(resultSetHeader)
 
       res.redirect('/')
     } else {
