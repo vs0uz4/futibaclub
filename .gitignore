@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Database scheema backup file
-db_scheema/*.bak
+support_files/db_scheema/*.bak
 
 # Dependency directories
 node_modules/
