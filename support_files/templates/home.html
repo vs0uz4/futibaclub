@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="full-height">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Futiba Club - Fullstack Academy - DevPleno</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/futiba.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <!--Navbar-->
+        <nav class="navbar-home navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Grupos</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                                <a class="nav-link" href="#">Classificação</a>
+                            </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                            Entrar
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+    
+        <!--Intro Section-->
+        <section class="view intro-2 hm-gradient">
+            <div class="full-bg-img">
+                <div class="container flex-center">
+                    <div class="row flex-center">
+                        <div class="col-md-10 col-lg-6 text-center text-md-left margins">
+                            <div class="white-text">
+                                <img src="/img-futiba-club/logo2.png" />
+                                <h1 class="h1-responsive font-bold mt-sm-5 wow fadeInLeft" data-wow-delay="0.3s">Desafie seus amigos</h1>
+                                <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                                <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Quem consegue acertar mais jogos da Copa e do Brasileirão?
+                                </h6>
+                                <br>
+                                <a class="btn btn-white dark-grey-text font-bold wow fadeInLeft" data-wow-delay="0.3s">Criar conta</a>
+                                <a class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Ver classificação</a>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 hidden-md-down wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
+                            <img src="/img-futiba-club/mock.png" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>            
+    </header>
+
+    <section>
+        <div class="container">
+            <h2>Classificação Grupos</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Grupo</th>
+                        <th>Pontos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Peladeiros da noite</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Masters of None</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Filhos do Pelé</td>
+                        <td>300</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="card col">
+                    <div class="card-body">
+                        <form>
+                            <p class="h5 text-center mb-4">Entrar</p>
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input type="text" id="orangeForm-email" class="form-control">
+                                <label for="orangeForm-email">E-mail</label>
+                            </div>
+                        
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input type="password" id="orangeForm-pass" class="form-control">
+                                <label for="orangeForm-pass">Senha</label>
+                            </div>
+                        
+                            <div class="text-center">
+                                <button class="btn btn-deep-orange">Entrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card col">
+                    <div class="card-body">
+                        <form class="col">
+                            <p class="h5 text-center mb-4">Criar uma conta</p>
+                        
+                            <div class="md-form">
+                                <i class="fa fa-user prefix grey-text"></i>
+                                <input type="text" id="orangeForm-name" class="form-control">
+                                <label for="orangeForm-name">Seu nome</label>
+                            </div>
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input type="text" id="orangeForm-email" class="form-control">
+                                <label for="orangeForm-email">Seu e-mail</label>
+                            </div>
+                        
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input type="password" id="orangeForm-pass" class="form-control">
+                                <label for="orangeForm-pass">Sua senha</label>
+                            </div>
+                        
+                            <div class="text-center">
+                                <button class="btn btn-deep-orange">Criar conta</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <!-- Form contact -->
+<form>
+
+        <p class="h5 text-center mb-4">Write to us</p>
+    
+        <div class="md-form">
+            <i class="fa fa-user prefix grey-text"></i>
+            <input type="text" id="form3" class="form-control">
+            <label for="form3">Your name</label>
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input type="text" id="form2" class="form-control">
+            <label for="form2">Your email</label>
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-tag prefix grey-text"></i>
+            <input type="text" id="form32" class="form-control">
+            <label for="form34">Subject</label>
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-pencil prefix grey-text"></i>
+            <textarea type="text" id="form8" class="md-textarea" style="height: 100px"></textarea>
+            <label for="form8">Your message</label>
+        </div>
+    
+        <div class="text-center">
+            <button class="btn btn-unique">Send <i class="fa fa-paper-plane-o ml-1"></i></button>
+        </div>
+    
+    </form>
+    <!-- Form contact -->
+    </section>
+    
+    <footer class="page-footer center-on-small-only">
+        <div class="footer-copyright">
+            <div class="container-fluid">
+                © 2018 Projeto desenvolvido durante o Fullstack Academy - <a href="https://www.devpleno.com">DevPleno</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
+</body>
+
+</html>
