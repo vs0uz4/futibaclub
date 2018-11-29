@@ -67,8 +67,6 @@ const init = connection => {
         groupsRanking,
         usersRanking
       }
-
-      console.log(classification)
     }
 
     res.render('ranking', classification)
