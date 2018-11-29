@@ -9,20 +9,20 @@
         <a class="nav-link" href="/ranking"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Classificação</a>
     </li>
     <% if (locals.user) { %>
-        <li class="nav-item dropdown <%- (locals.url.length > 1 && locals.url.includes('/admin/games')) ? 'active' : '' %>">
+        <li class="nav-item dropdown <%- (locals.url.length > 1 && locals.url.includes('/admin/games')) ? 'active' : locals.url.includes('/profile') ? 'active' : '' %>">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> <%= user.name %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <% if (user.role === 'root') { %>
-                    <a class="dropdown-item" href="/admin/games"><i class="fa fa-trophy fa-fw" aria-hidden="true"></i> Gerenciar Jogos</a>
+                    <a class="dropdown-item <%- (locals.url.length > 1 && locals.url.includes('/admin/games')) ? 'active' : '' %>" href="/admin/games"><i class="fa fa-trophy fa-fw" aria-hidden="true"></i> Gerenciar Jogos</a>
                 <% } %>
-                <a class="dropdown-item" href="#"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> Meu Perfil</a>
+                <a class="dropdown-item <%- (locals.url.length > 1 && locals.url.includes('/profile')) ? 'active' : '' %>" href="/profile"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> Meu Perfil</a>
                 <a class="dropdown-item" href="/sign-out"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Sair</a>
             </div>
         </li>
     <% } else { %>
-        <li class="nav-item <%- (locals.url.length > 1 && locals.url.includes('sign-in')) ? 'active' : locals.url.includes('new-account') ? 'active' : '' %>">
+        <li class="nav-item <%- (locals.url.length > 1 && locals.url.includes('/sign-in')) ? 'active' : locals.url.includes('/new-account') ? 'active' : '' %>">
             <a class="nav-link" href="/sign-in"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i> Entrar</a>
         </li>
     <% } %>

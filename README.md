@@ -24,14 +24,16 @@ Após os jogos terem sido concluídos seus resultados podem ser lançados no apl
 - Gerencia de Grupos de Usuários;
 - Gerencia de Jogos e seus Resultados;
 - Classificação de Usuários e Grupos;
-- ~~Gerenciamento de Dados do Perfil~~;
+- Gerenciamento de Dados do Perfil;
 - ~~Formulário de Contato~~.
 
 ## Todo
 Algumas funcionalidades extras que não encontravam-se no escopo do treinamento estão na pendência de serem desenvolvidas. Estas funcionalidades foram sugeridas como melhoria para o projeto de forma a constarem no portifólio de aplicações/projetos desenvolvidos. As funcionalidades a serem desenvolvidas são:
-- Gerenciamento de Dados do Perfil;
+- ~~Gerenciamento de Dados do Perfil~~;
 - Formulário de Contato;
 - Efetuar deploy e hospedar.
+
+> Ultima atualização : 29/11/2018
 
 ## Informações importantes:
 

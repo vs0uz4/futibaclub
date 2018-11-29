@@ -40,6 +40,12 @@ h6 {
   background-color: #4CAF50 !important;
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff !important;
+  text-decoration: none;
+  background-color: #bfbfc46c;
+}
+
 .content {
   margin: 140px 0 0 0;
 }

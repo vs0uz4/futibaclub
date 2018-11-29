@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- header -->
+    <% include ../_partials/painel/header %>
+</head>
+
+<body>
+    <header>
+    <!-- navbar -->
+    <% include ../_partials/navbar %>
+    </header>
+
+    <section class="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <form class="col col-6" method="POST" action="/profile/<%= locals.id %>">
+                    <p class="h5 text-center mb-4">Alterar dados do perfil</p>
+
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="orangeForm-name" name="name" class="form-control" value="<%= locals.name ? name : '' %>" required autofocus />
+                        <label for="orangeForm-name">Seu nome</label>
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <input type="email" id="orangeForm-email" name="email" class="form-control" value="<%= locals.email ? email : '' %>" required />
+                        <label for="orangeForm-email">Seu e-mail</label>
+                    </div>
+                
+                    <div class="md-form">
+                        <i class="fa fa-lock prefix grey-text"></i>
+                        <input type="password" id="orangeForm-pass" name="passwd" class="form-control" required />
+                        <label for="orangeForm-pass">Sua senha</label>
+                    </div>
+
+                    <% if(locals.error) { %>
+                        <div class="alert alert-danger">
+                            <%= error %>
+                        </div>
+                    <% } %>
+
+                    <div class="text-center">
+                        <button class="btn btn-deep-orange">Atualizar conta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <% include ../_partials/painel/footer %>
+</body>
+</html>

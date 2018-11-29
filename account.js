@@ -81,6 +81,61 @@ const init = connection => {
     }
   })
 
+  route.get('/profile', async (req, res) => {
+    if (req.session.user) {
+      const userId = req.session.user.id
+      const [rows, fields] = await connection.execute('SELECT id, name, email FROM users WHERE id = ?', [userId])
+
+      if (rows.length > 0) {
+        res.render('account/profile', {
+          id: rows[0].id,
+          name: rows[0].name,
+          email: rows[0].email
+        })
+      } else {
+        req.session.destroy(err => {
+          if (err) {
+            console.log(`Error Destroying Session\nError: ${err.code}\nMessage ${err.message}`)
+          }
+
+          res.redirect('/sign-in')
+        })
+      }
+    } else {
+      res.redirect('/sign-in')
+    }
+  })
+
+  route.post('/profile/:id', async (req, res) => {
+    const [rows, fields] = await connection.execute('SELECT * FROM users WHERE id = ? LIMIT 1', [req.params.id])
+
+    const {
+      name,
+      email,
+      passwd
+    } = req.body
+
+    if (rows.length > 0) {
+      await connection.execute('UPDATE users SET name = ?, email = ?, passwd = ? WHERE id = ?', [
+        name,
+        email,
+        md5(passwd),
+        req.params.id
+      ])
+
+      const user = {
+        id: rows[0].id,
+        name: name,
+        role: rows[0].role
+      }
+      req.session.user = user
+
+      res.redirect('/')
+    } else {
+      res.redirect('/sign-in')
+    }
+  })
+
   return route
 }
 
