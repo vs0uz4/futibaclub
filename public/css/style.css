@@ -44,3 +44,56 @@
   width: 140px !important;
   line-height: 35px;
 }
+
+select.form-control:not([size]):not([multiple]) {
+  margin-left: 2.65rem;
+  height: calc(2.25rem + 2px);
+  width: calc(100% - 2.65rem);
+  width: -webkit-fill-available;
+}
+
+select.md-select {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #bdbdbd;
+  border-radius: 0;
+  outline: 0;
+  height: 2.1rem;
+  width: 100%;
+  font-size: 1rem;
+  color: rgb(117, 117, 117);
+  font: 300 16px Roboto;
+  cursor: text;
+  box-shadow: none;
+  box-sizing: content-box;
+}
+
+select.md-select > option:not(:disabled), select.md-select > option:not(:checked) { 
+  color: rgb(117, 117, 117);
+  font: 300 16px Roboto;
+  cursor: text;
+}
+
+select.md-select > option:disabled { 
+  color: rgba(117, 117, 117, 0.568);
+  font: 300 16px Roboto;
+  cursor: text;
+}
+
+select.md-select > option:checked:not(:disabled){
+  color: #495057;
+  font: 400 16px Roboto;
+  cursor: text;
+}
+
+.md-select-dropdowned {
+  color: #495057 !important;
+  font: 400 16px Roboto !important;
+  cursor: text !important;
+}
+
+textarea {
+  color: #495057;
+  font: 400 1rem Roboto;
+  cursor: text;
+}

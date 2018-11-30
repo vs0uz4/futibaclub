@@ -43,32 +43,49 @@
     <section>
         <div class="container mt-5">
             <!-- Form contact -->
-            <form>
+            <form name="contactUs" method="POST">
                 <p class="h5 text-center mb-4">Escreva para nós</p>
 
                 <div class="md-form">
                     <i class="fa fa-user prefix grey-text"></i>
-                    <input type="text" id="form3" class="form-control">
-                    <label for="form3">Seu nome</label>
+                    <input type="text" id="name" name="name" class="form-control">
+                    <label for="name">Seu nome</label>
                 </div>
 
                 <div class="md-form">
                     <i class="fa fa-envelope prefix grey-text"></i>
-                    <input type="text" id="form2" class="form-control">
-                    <label for="form2">Seu email</label>
+                    <input type="text" id="email" name="email" class="form-control">
+                    <label for="email">Seu email</label>
                 </div>
 
                 <div class="md-form">
                     <i class="fa fa-tag prefix grey-text"></i>
-                    <input type="text" id="form32" class="form-control">
-                    <label for="form34">Assunto</label>
+                    <select id="subject" name="subject" class="form-control md-select">
+                        <option value="0" disabled selected>Assunto</option>
+                        <option value="1">Reclamações</option>
+                        <option value="2">Sugestões</option>
+                        <option value="3">Informações</option>
+                        <option value="4">Outros</option>
+                    </select>
                 </div>
 
                 <div class="md-form">
                     <i class="fa fa-pencil prefix grey-text"></i>
-                    <textarea type="text" id="form8" class="md-textarea" style="height: 100px"></textarea>
-                    <label for="form8">Sua mensagem</label>
+                    <textarea type="text" id="message" name="message" class="md-textarea" style="height: 100px"></textarea>
+                    <label for="message">Sua mensagem</label>
                 </div>
+
+                <% if(locals.error) { %>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Atenção!</strong> <%= locals.error %>
+                    </div>
+                <% } else if (locals.previewUrl) { %>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <a href="<%= locals.previewUrl %>" target="_blank" class="alert-link"><i class="fa fa-eye fa-fw" aria-hidden="true"></i></a> Mensagem enviada com sucesso!
+                    </div>
+                <% } %>
 
                 <div class="text-center">
                     <button class="btn btn-unique">Enviar <i class="fa fa-paper-plane-o ml-1"></i></button>
@@ -80,5 +97,13 @@
 
     <!-- footer -->
     <% include _partials/page/footer %>
+
+    <script>
+        jQuery(document).ready(function($){ 
+            $("#subject").change(function () {
+                $("#subject").addClass('md-select-dropdowned')
+            })
+        })
+    </script>
 </body>
 </html>
