@@ -12,7 +12,7 @@ const groups = require('./groups')
 const ranking = require('./ranking')
 
 // Get Enviroment Variables
-const port = process.env.APP_PORT || 3000
+const port = process.env.PORT || 3000
 const appName = process.env.APP_NAME || 'FutibaClub'
 const dbHost = process.env.DB_HOST || 'localhost'
 const dbPort = process.env.DB_PORT || 3306
@@ -80,7 +80,7 @@ const init = async () => {
     app.use('/ranking', ranking(connection))
     app.use('/admin', admin(connection))
 
-    app.listen(port, error => {
+    app.listen(port, '0.0.0.0', error => {
       if (error) {
         console.log(`Error in Startup ${appName} Server\nError Message ${error.message}`)
       } else {
