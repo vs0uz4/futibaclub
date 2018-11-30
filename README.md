@@ -29,7 +29,9 @@ Após os jogos terem sido concluídos seus resultados podem ser lançados no apl
 - Gerenciamento de Dados do Perfil;
 - Formulário de Contato.
 
-> O formulário de contato foi implementado usando o package [node-mailer](https://nodemailer.com/about/). Para fins de demonstração utilizei o `transport` [Ethereal Email](https://ethereal.email/) para visualizar as mensagens enviadas por SMTP dispensando a necessidade de usar um SMTP real. 
+> O formulário de contato foi implementado usando o package [node-mailer](https://nodemailer.com/about/). Para fins de demonstração utilizei o `transport` [Ethereal Email](https://ethereal.email/) para visualizar as mensagens enviadas por SMTP dispensando a necessidade de usar um SMTP real.
+
+> Para visualizar a mensagem de e-mail enviada, basta clicar no ícone presente no alerta que irá surgir após o envio, logo acima do botão `enviar` da seção de contatos.
 
 ## Todo
 Algumas funcionalidades extras que não encontravam-se no escopo do treinamento estão na pendência de serem desenvolvidas. Estas funcionalidades foram sugeridas como melhoria para o projeto de forma a constarem no portifólio de aplicações/projetos desenvolvidos. As funcionalidades a serem desenvolvidas são:
