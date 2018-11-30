@@ -4,7 +4,8 @@
   "description": "Bolão de Apostas de Resultados dos Jogos de Futebol",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: nenhum teste especificado\" && exit 1"
+    "test": "echo \"Error: nenhum teste especificado\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [
     "futibol",
