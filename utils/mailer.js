@@ -32,8 +32,6 @@ const init = async (account, options) => {
       previewUrl: nodemailer.getTestMessageUrl(transporterMailed)
     }
 
-    console.log('Interno: ', reply)
-
     return reply
   } else {
     const err = 'Mailer : Parametros {account} e {options} para criação de mailer indefinidos'
@@ -43,8 +41,6 @@ const init = async (account, options) => {
       messageId: null,
       previewUrl: null
     }
-
-    console.log(err)
 
     return reply
   }
