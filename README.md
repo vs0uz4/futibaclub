@@ -11,7 +11,7 @@ O FutibaClub é um aplicativo web, para você palpitar resultados de jogos de fu
 
 Após os jogos terem sido concluídos seus resultados podem ser lançados no aplicativo e neste momento automatiamente a classificação dos usuários e grupos será calculada.
 
-## Tecnologias Envolvidas
+## :hammer_and_wrench: Tecnologias Envolvidas
 - NodeJS;
 - MySQL;
 - Redis IO;
@@ -20,7 +20,7 @@ Após os jogos terem sido concluídos seus resultados podem ser lançados no apl
 - Nodemailer;
 - Ethereal Email.
 
-## Funcionalidades
+## :gear: Funcionalidades
 
 - Criação de Contas de Usuários;
 - Gerencia de Grupos de Usuários;
@@ -33,15 +33,20 @@ Após os jogos terem sido concluídos seus resultados podem ser lançados no apl
 
 > Para visualizar a mensagem de e-mail enviada, basta clicar no ícone presente no alerta que irá surgir após o envio, logo acima do botão `enviar` da seção de contatos.
 
-## Todo
+## :open_book: Todo
 Algumas funcionalidades extras que não encontravam-se no escopo do treinamento estão na pendência de serem desenvolvidas. Estas funcionalidades foram sugeridas como melhoria para o projeto de forma a constarem no portifólio de aplicações/projetos desenvolvidos. As funcionalidades a serem desenvolvidas são:
 - ~~Gerenciamento de Dados do Perfil~~;
 - ~~Formulário de Contato~~;
-- Efetuar deploy e hospedar.
+- ~~Efetuar deploy e hospedar~~;
+- Refatorar código;
+- Implementar CI/CD; 
 
-> Ultima atualização : 30/11/2018
+> Ultima atualização : 04/02/2021
 
-## Informações importantes:
+## :eye: Aplicação Rodando
+:point_right: [FutibaClub](https://futibaclub.vsouza.rio.br/)
+
+## :anger: Informações importantes:
 
 Este projeto foi entregue como parte do **Fullstack Academy** (edição FutibaClub) promovido pelo **DevPleno** (www.devpleno.com).
 
