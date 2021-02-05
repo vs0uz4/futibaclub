@@ -39,7 +39,8 @@ Algumas funcionalidades extras que não encontravam-se no escopo do treinamento 
 - ~~Formulário de Contato~~;
 - ~~Efetuar deploy e hospedar~~;
 - Refatorar código;
-- Implementar CI/CD; 
+- Implmentar testes;
+- Implementar CI/CD. 
 
 > Ultima atualização : 04/02/2021
 
