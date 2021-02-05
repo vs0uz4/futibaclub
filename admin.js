@@ -8,7 +8,7 @@ const init = connection => {
   })
 
   route.get('/games', async (req, res) => {
-    const [rows, fields] = await connection.execute('SELECT * FROM games')
+    const [rows, fields] = await connection.execute('SELECT games.team_a, games.team_b, games.id, games.result_a, games.result_b FROM `games`')
 
     res.render('admin/games', {
       games: rows
@@ -20,7 +20,7 @@ const init = connection => {
       team_a: teamA,
       team_b: teamB
     } = req.body
-    await connection.execute('INSERT INTO games (team_a, team_b) VALUES (?, ?)', [
+    await connection.execute('INSERT INTO `games` (games.team_a, games.team_b) VALUES (?, ?)', [
       teamA,
       teamB
     ])
@@ -45,13 +45,13 @@ const init = connection => {
     for (let i = 0; i < games.length; i++) {
       const game = games[i]
 
-      await connection.execute('UPDATE games SET result_a = ?, result_b = ? WHERE id = ?', [
+      await connection.execute('UPDATE `games` SET games.result_a = ?, games.result_b = ? WHERE games.id = ?', [
         game.result_a,
         game.result_b,
         game.game_id
       ])
 
-      const [guessings] = await connection.execute('SELECT * FROM guessings WHERE game_id = ?', [
+      const [guessings] = await connection.execute('SELECT guessings.id, guessings.game_id, guessings.group_id, guessings.user_id, guessings.result_a, guessings.result_b, guessings.score FROM `guessings` WHERE guessings.game_id = ?', [
         game.game_id
       ])
 
@@ -71,7 +71,7 @@ const init = connection => {
           score += 25
         }
 
-        return connection.execute('UPDATE guessings SET score = ? WHERE id = ?', [
+        return connection.execute('UPDATE `guessings` SET guessings.score = ? WHERE guessings.id = ?', [
           score,
           guess.id
         ])
@@ -79,14 +79,14 @@ const init = connection => {
 
       await Promise.all(batch)
 
-      const [groups] = await connection.execute('SELECT groups.id, groups.name, SUM(guessings.score) as score FROM groups LEFT JOIN guessings ON guessings.group_id = groups.id GROUP BY groups.id ORDER BY score DESC')
+      const [groups] = await connection.execute('SELECT groups.id, groups.name, SUM(guessings.score) as score FROM `groups` LEFT JOIN guessings ON guessings.group_id = groups.id GROUP BY groups.id ORDER BY score DESC')
       await encRedisClient.setexAsync('groupsRanking', 84600, groups, (err) => {
         if (err) {
           console.log(err.message)
         }
       })
 
-      const [users] = await connection.execute('SELECT users.id, users.name, SUM(guessings.score) as score FROM users LEFT JOIN guessings on guessings.user_id = users.id GROUP BY users.id ORDER BY score DESC')
+      const [users] = await connection.execute('SELECT users.id, users.name, SUM(guessings.score) as score FROM `users` LEFT JOIN guessings on guessings.user_id = users.id GROUP BY users.id ORDER BY score DESC')
       await encRedisClient.setexAsync('usersRanking', 84600, users, (err) => {
         if (err) {
           console.log(err.message)
@@ -104,7 +104,7 @@ const init = connection => {
   })
 
   route.get('/games/delete/:id', async (req, res) => {
-    await connection.execute('DELETE FROM games WHERE id = ? LIMIT 1', [
+    await connection.execute('DELETE FROM `games` WHERE games.id = ? LIMIT 1', [
       req.params.id
     ])
 
