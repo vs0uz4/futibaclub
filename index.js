@@ -12,16 +12,16 @@ const groups = require('./groups')
 const ranking = require('./ranking')
 
 // Get Enviroment Variables
-const port = process.env.PORT || 3000
-const appName = process.env.APP_NAME || 'FutibaClub'
-const dbHost = process.env.DB_HOST || 'localhost'
-const dbPort = process.env.DB_PORT || 3306
-const dbDatabase = process.env.DB_DATABASE || 'futibaclub'
-const dbUsername = process.env.DB_USERNAME || 'root'
-const dbPassword = process.env.DB_PASSWORD || 'secret'
-const sessionSecret = process.env.SESSION_SECRET || 'secret'
-const etherealUser = process.env.ETHEREAL_USER || 'user'
-const etherealPasswd = process.env.ETHEREAL_PASSWD || 'secret'
+const port = process.env.PORT
+const appName = process.env.APP_NAME
+const dbHost = process.env.DB_HOST
+const dbPort = process.env.DB_PORT
+const dbDatabase = process.env.DB_DATABASE
+const dbUsername = process.env.DB_USERNAME
+const dbPassword = process.env.DB_PASSWORD
+const sessionSecret = process.env.SESSION_SECRET
+const etherealUser = process.env.ETHEREAL_USER
+const etherealPasswd = process.env.ETHEREAL_PASSWD
 
 const app = express()
 app.use(express.static('public'))
