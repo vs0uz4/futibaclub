@@ -13,7 +13,7 @@ const init = connection => {
       passwd
     } = req.body
 
-    const [rows, fields] = await connection.execute('SELECT * FROM users WHERE email = ?', [email])
+    const [rows, fields] = await connection.execute('SELECT users.id, users.name, users.email, users.passwd, users.`role` FROM `users` WHERE users.email = ?', [email])
     if (rows.length !== 0 && rows[0].passwd === md5(passwd)) {
       const userDb = rows[0]
       const user = {
@@ -54,9 +54,9 @@ const init = connection => {
       passwd
     } = req.body
 
-    const [rows, fields] = await connection.execute('SELECT * FROM users WHERE email = ?', [email])
+    const [rows, fields] = await connection.execute('SELECT users.id, users.name, users.email, users.passwd, users.`role` FROM `users` WHERE users.email = ?', [email])
     if (rows.length === 0) {
-      const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO users (name, email, passwd, role) VALUES (?, ?, ?, ?)', [
+      const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO `users` (users.name, users.email, users.passwd, users.role) VALUES (?, ?, ?, ?)', [
         name,
         email,
         md5(passwd),
@@ -84,7 +84,7 @@ const init = connection => {
   route.get('/profile', async (req, res) => {
     if (req.session.user) {
       const userId = req.session.user.id
-      const [rows, fields] = await connection.execute('SELECT id, name, email FROM users WHERE id = ?', [userId])
+      const [rows, fields] = await connection.execute('SELECT users.id, users.name, users.email FROM `users` WHERE id = ?', [userId])
 
       if (rows.length > 0) {
         res.render('account/profile', {
@@ -107,7 +107,7 @@ const init = connection => {
   })
 
   route.post('/profile/:id', async (req, res) => {
-    const [rows, fields] = await connection.execute('SELECT * FROM users WHERE id = ? LIMIT 1', [req.params.id])
+    const [rows, fields] = await connection.execute('SELECT users.id, users.name, users.email, users.passwd, users.`role` FROM `users` WHERE id = ? LIMIT 1', [req.params.id])
 
     const {
       name,
@@ -116,7 +116,7 @@ const init = connection => {
     } = req.body
 
     if (rows.length > 0) {
-      await connection.execute('UPDATE users SET name = ?, email = ?, passwd = ? WHERE id = ?', [
+      await connection.execute('UPDATE `users` SET users.name = ?, users.email = ?, users.passwd = ? WHERE users.id = ?', [
         name,
         email,
         md5(passwd),

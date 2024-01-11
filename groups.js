@@ -3,7 +3,7 @@ const route = express.Router()
 
 const init = connection => {
   route.get('/', async (req, res) => {
-    const [rows, fields] = await connection.execute('SELECT groups.*, groups_users.role FROM groups LEFT JOIN groups_users ON groups.id = groups_users.group_id AND groups_users.user_id = ?', [
+    const [rows, fields] = await connection.execute('SELECT groups.id, groups.name, groups_users.role FROM `groups` LEFT JOIN groups_users ON groups.id = groups_users.group_id AND groups_users.user_id = ?', [
       req.session.user.id
     ])
     res.render('groups', {
@@ -12,10 +12,11 @@ const init = connection => {
   })
 
   route.post('/', async (req, res) => {
-    const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO groups (name) VALUES (?)', [
+    const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO `groups` (groups.name) VALUES (?)', [
       req.body.name
     ])
-    await connection.execute('INSERT INTO groups_users (group_id, user_id, role) VALUES (?, ?, ?)', [
+
+    await connection.execute('INSERT INTO `groups_users` (groups_users.group_id, groups_users.user_id, groups_users.role) VALUES (?, ?, ?)', [
       resultSetHeader.insertId,
       req.session.user.id,
       'owner'
@@ -25,14 +26,14 @@ const init = connection => {
   })
 
   route.get('/:id', async (req, res) => {
-    const [groupRows, groupFields] = await connection.execute('SELECT groups.*, groups_users.role FROM groups LEFT JOIN groups_users ON groups_users.group_id = groups.id AND groups_users.user_id = ? WHERE groups.id = ?', [
+    const [groupRows, groupFields] = await connection.execute('SELECT groups.id, groups.name, groups_users.role FROM `groups` LEFT JOIN groups_users ON groups_users.group_id = groups.id AND groups_users.user_id = ? WHERE groups.id = ?', [
       req.session.user.id,
       req.params.id
     ])
-    const [pendingRows, pendingFields] = await connection.execute("SELECT groups_users.*, users.name FROM groups_users INNER JOIN users ON groups_users.user_id = users.id AND groups_users.group_id = ? AND groups_users.role LIKE 'pending'", [
+    const [pendingRows, pendingFields] = await connection.execute("SELECT groups_users.id, groups_users.role, groups_users.user_id, groups_users.group_id, users.name FROM `groups_users` INNER JOIN users ON groups_users.user_id = users.id AND groups_users.group_id = ? AND groups_users.role LIKE 'pending'", [
       req.params.id
     ])
-    const [gameRows, gameFields] = await connection.execute('SELECT games.*, guessings.result_a as guess_a, guessings.result_b as guess_b, guessings.score FROM games LEFT JOIN guessings ON games.id = guessings.game_id AND guessings.user_id = ? AND guessings.group_id = ?', [
+    const [gameRows, gameFields] = await connection.execute('SELECT games.id, games.result_a, games.result_b, games.team_a, games.team_b, guessings.result_a as guess_a, guessings.result_b as guess_b, guessings.score FROM `games` LEFT JOIN guessings ON games.id = guessings.game_id AND guessings.user_id = ? AND guessings.group_id = ?', [
       req.session.user.id,
       req.params.id
     ])
@@ -59,7 +60,7 @@ const init = connection => {
       })
 
     const batch = guessings.map(guess => {
-      return connection.execute('INSERT INTO guessings (result_a, result_b, game_id, group_id, user_id) VALUES (?, ?, ?, ?, ?)', [
+      return connection.execute('INSERT INTO `guessings` (guessings.result_a, guessings.result_b, guessings.game_id, guessings.group_id, guessings.user_id) VALUES (?, ?, ?, ?, ?)', [
         guess.result_a,
         guess.result_b,
         guess.game_id,
@@ -73,13 +74,13 @@ const init = connection => {
   })
 
   route.get('/:id/participate', async (req, res) => {
-    const [rows, fields] = await connection.execute('SELECT * FROM groups_users WHERE user_id = ? AND group_id = ?', [
+    const [rows, fields] = await connection.execute('SELECT groups_users.id, groups_users.role, groups_users.user_id, groups_users.group_id FROM `groups_users` WHERE user_id = ? AND group_id = ?', [
       req.session.user.id,
       req.params.id
     ])
 
     if (rows.length === 0) {
-      const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO groups_users (group_id, user_id, role) VALUES (?, ?, ?)', [
+      const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO `groups_users` (groups_users.group_id, groups_users.user_id, groups_users.role) VALUES (?, ?, ?)', [
         req.params.id,
         req.session.user.id,
         'pending'
@@ -90,7 +91,7 @@ const init = connection => {
   })
 
   route.get('/:groupId/approval/:groupsUsersId/:op', async (req, res) => {
-    const [rows, fields] = await connection.execute('SELECT groups.*, groups_users.role FROM groups LEFT JOIN groups_users ON groups_users.group_id = groups.id AND groups_users.user_id = ? WHERE groups.id = ?', [
+    const [rows, fields] = await connection.execute('SELECT groups.id, groups.name, groups_users.role FROM `groups` LEFT JOIN groups_users ON groups_users.group_id = groups.id AND groups_users.user_id = ? WHERE groups.id = ?', [
       req.session.user.id,
       req.params.groupId
     ])
@@ -99,11 +100,11 @@ const init = connection => {
       res.redirect('/groups/' + req.params.groupId)
     } else {
       if (req.params.op === 'yes') {
-        await connection.execute('UPDATE groups_users SET role = "user" WHERE id = ?', [
+        await connection.execute('UPDATE `groups_users` SET groups_users.role = "user" WHERE groups_users.id = ?', [
           req.params.groupsUsersId
         ])
       } else {
-        await connection.execute('DELETE FROM groups_users WHERE id = ?', [
+        await connection.execute('DELETE FROM `groups_users` WHERE groups_users.id = ?', [
           req.params.groupsUsersId
         ])
       }
@@ -113,13 +114,13 @@ const init = connection => {
   })
 
   route.get('/delete/:id', async (req, res) => {
-    const [rows, fields] = await connection.execute('SELECT groups.*, groups_users.role FROM groups LEFT JOIN groups_users ON groups_users.group_id = groups.id AND groups_users.user_id = ? WHERE groups.id = ?', [
+    const [rows, fields] = await connection.execute('SELECT groups.id, groups.name, groups_users.role FROM `groups` LEFT JOIN groups_users ON groups_users.group_id = groups.id AND groups_users.user_id = ? WHERE groups.id = ?', [
       req.session.user.id,
       req.params.id
     ])
 
     if (rows.length > 0 || rows[0].role === 'owner') {
-      await connection.execute('DELETE FROM groups WHERE id = ?', [
+      await connection.execute('DELETE FROM `groups` WHERE groups.id = ?', [
         req.params.id
       ])
     }
