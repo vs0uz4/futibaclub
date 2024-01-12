@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const cookieParser = require("cookie-parser")
+const cookieSession = require("cookie-session")
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const csrf = require('lusca').csrf
@@ -15,6 +16,7 @@ const groups = require('./groups')
 const ranking = require('./ranking')
 
 // Get Enviroment Variables
+const enviroment = process.env.NODE_ENV
 const port = process.env.PORT
 const appName = process.env.APP_NAME
 const dbHost = process.env.DB_HOST
@@ -34,6 +36,13 @@ const limiter = ratelimit({
 app.use(limiter)
 app.use(express.static('public'))
 app.use(cookieParser());
+app.use(cookieSession({
+  name: 'session',
+  keys: [sessionSecret],
+  secure: enviroment !== "development",
+  httpOnly: true,
+  maxAge: 24 * 60 * 60 * 1000
+}))
 app.use(bodyParser.urlencoded({
   extended: false
 }))
