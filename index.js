@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express')
 const cookieParser = require("cookie-parser")
-const cookieSession = require("cookie-session")
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const csrf = require('lusca').csrf
@@ -36,22 +35,21 @@ const limiter = ratelimit({
 app.use(limiter)
 app.use(express.static('public'))
 app.use(cookieParser());
-app.use(cookieSession({
-  name: 'session',
-  keys: [sessionSecret],
-  secure: enviroment !== "development",
-  httpOnly: true,
-  maxAge: 24 * 60 * 60 * 1000
-}))
 app.use(bodyParser.urlencoded({
   extended: false
 }))
 app.use(session({
   secret: sessionSecret,
-  cookie: { maxAge: 60000 },
+  cookie: { keys: [sessionSecret], secure: enviroment !== "development", httpOnly: true, maxAge: 60000 },
   saveUninitialized: true,
   resave: true
 }))
+
+
+
+  
+  
+  maxAge: 24 * 60 * 60 * 1000
 app.use(csrf())
 app.use(middleware)
 app.set('view engine', 'ejs')
