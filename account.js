@@ -1,6 +1,6 @@
 const express = require('express')
 const route = express.Router()
-const md5 = require('./utils/md5')
+const crypto = require('./utils/crypto')
 
 const init = connection => {
   route.get('/sign-in', (req, res) => {
@@ -14,7 +14,7 @@ const init = connection => {
     } = req.body
 
     const [rows, fields] = await connection.execute('SELECT users.id, users.name, users.email, users.passwd, users.`role` FROM `users` WHERE users.email = ?', [email])
-    if (rows.length !== 0 && rows[0].passwd === md5(passwd)) {
+    if (rows.length !== 0 && rows[0].passwd === crypto(passwd)) {
       const userDb = rows[0]
       const user = {
         id: userDb.id,
@@ -59,7 +59,7 @@ const init = connection => {
       const [resultSetHeader, resultSet] = await connection.execute('INSERT INTO `users` (users.name, users.email, users.passwd, users.role) VALUES (?, ?, ?, ?)', [
         name,
         email,
-        md5(passwd),
+        crypto(passwd),
         'user'
       ])
 
@@ -119,7 +119,7 @@ const init = connection => {
       await connection.execute('UPDATE `users` SET users.name = ?, users.email = ?, users.passwd = ? WHERE users.id = ?', [
         name,
         email,
-        md5(passwd),
+        crypto(passwd),
         req.params.id
       ])
 
