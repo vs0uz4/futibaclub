@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
+const ratelimit = require('express-rate-limit')
 const mysql = require('mysql2/promise')
 const bodyParser = require('body-parser')
 
@@ -24,6 +25,11 @@ const etherealUser = process.env.ETHEREAL_USER
 const etherealPasswd = process.env.ETHEREAL_PASSWD
 
 const app = express()
+const limiter = ratelimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+})
+app.use(limiter)
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({
   extended: true
@@ -35,6 +41,7 @@ app.use(session({
 }))
 app.use(middleware)
 app.set('view engine', 'ejs')
+
 
 const init = async () => {
   try {
