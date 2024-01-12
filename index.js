@@ -1,9 +1,11 @@
 require('dotenv').config()
 const express = require('express')
+const cookieParser = require("cookie-parser")
+const bodyParser = require('body-parser')
 const session = require('express-session')
+const csrf = require('lusca').csrf
 const ratelimit = require('express-rate-limit')
 const mysql = require('mysql2/promise')
-const bodyParser = require('body-parser')
 
 const middleware = require('./middleware')
 const mailer = require('./utils/mailer')
@@ -31,14 +33,17 @@ const limiter = ratelimit({
 })
 app.use(limiter)
 app.use(express.static('public'))
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false
 }))
 app.use(session({
   secret: sessionSecret,
+  cookie: { maxAge: 60000 },
   saveUninitialized: true,
   resave: true
 }))
+app.use(csrf())
 app.use(middleware)
 app.set('view engine', 'ejs')
 
