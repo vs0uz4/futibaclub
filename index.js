@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express')
 const cookieParser = require("cookie-parser")
-const cookieSession = require("cookie-session")
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const csrf = require('lusca').csrf
@@ -41,20 +40,13 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(session({
   secret: sessionSecret,
+  cookie: { keys: [sessionSecret], secure: enviroment !== "development", httpOnly: true, maxAge: 24 * 60 * 60 * 1000 },
   saveUninitialized: true,
   resave: true
-}))
-app.use(cookieSession({
-  name: 'session',
-  keys: [sessionSecret],
-  secure: enviroment !== "development",
-  httpOnly: true,
-  maxAge: 24 * 60 * 60 * 1000
 }))
 app.use(csrf())
 app.use(middleware)
 app.set('view engine', 'ejs')
-
 
 const init = async () => {
   try {
